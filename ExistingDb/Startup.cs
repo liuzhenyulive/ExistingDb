@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExistingDb.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,7 +23,12 @@ namespace ExistingDb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<BloggingContext>(options =>
+            {
+                options.UseSqlServer((@"Server=desktop-8grmtdl;Database=Blogging;uid=sa;pwd=LZYerzhong2014"));
+            });
             services.AddMvc();
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
